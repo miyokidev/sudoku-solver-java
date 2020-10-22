@@ -2,45 +2,48 @@
  * Utility Class cannot be instantiated
  */
 public final class SudokuSolver {
-	public int[][] grid;
+	public static int[][] grid = null;
 	
-	public SudokuSolver() {
+	private SudokuSolver() {
 	}
 	
-	private boolean checkRow(int[][] grid) {
+	private static boolean checkRow(int row, int col, int n) {
+		
+		return true;
+	}
+	
+	private static boolean checkCol(int row, int col, int n) {
+		
+		return true;
+	}
+	
+	private static boolean checkBox(int row, int col, int n) {
+		
+		return true;
+	}
+	
+	private static boolean possible(int row, int col, int n) {
+		return false;
+	}
+	
+	public static int[][] solve(int[][] gridToSolve) {
+		grid = gridToSolve;
+		
 		for (int row = 0; row < grid.length; row++) {
 			for (int col = 0; col < grid[row].length; col++) {
-				
+				possible(row, col, 1);
 			}
 		}
-		return false;
-	}
-	
-	private boolean checkCol(int[][] grid) {
-		
-		return false;
-	}
-	
-	private boolean checkBox(int[][] grid) {
-		
-		return false;
-	}
-	
-	private boolean possible(int[][] grid) {
-		return false;
-	}
-	
-	public static int[][] solve(int[][] grid) {
 		return null;
 	}
 	
-	public static void show(int[][] grid) {
+	public static void show(int[][] gridToShow) {
 		String str = "";
 		
-		for (int row = 0; row < grid.length; row++) {
+		for (int row = 0; row < gridToShow.length; row++) {
 			str += "\r\n";
-			for (int col = 0; col < grid[row].length; col++) {
-				str += grid[row][col];
+			for (int col = 0; col < gridToShow[row].length; col++) {
+				str += gridToShow[row][col];
 			}
 		}
 		
