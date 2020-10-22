@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class Program {
 
@@ -23,7 +24,12 @@ public class Program {
 				  			{8,7,1,2,4,3,5,6,9},
 				  			{4,2,9,8,5,6,3,1,7},};
 		
-		
+		SudokuSolver.show(puzzle); // Show the puzzle before it's solved.
+		puzzle = SudokuSolver.solve(puzzle); // Methods that solve the puzzle
+		// If the puzzle is the same as the solution we show it.
+		if (Arrays.equals(puzzle, solution)) {
+			SudokuSolver.show(puzzle);	
+		}
 	}
 
 }
