@@ -7,13 +7,21 @@ public final class SudokuSolver {
 	private SudokuSolver() {
 	}
 	
-	private static boolean checkRow(int row, int col, int n) {
-		
+	private static boolean checkRow(int row, int n) {
+		for (int i = 1; i < 10; i++) {
+			if (grid[row][i] == n) {
+				return false;
+			}
+		}
 		return true;
 	}
 	
-	private static boolean checkCol(int row, int col, int n) {
-		
+	private static boolean checkCol(int col, int n) {
+		for (int i = 1; i < 10; i++) {
+			if (grid[i][col] == n) {
+				return false;
+			}
+		}
 		return true;
 	}
 	
@@ -23,6 +31,9 @@ public final class SudokuSolver {
 	}
 	
 	private static boolean possible(int row, int col, int n) {
+		if(checkRow(row, n) && checkCol(col, n) && checkBox(row, col, n)) {
+			return true;
+		}
 		return false;
 	}
 	
