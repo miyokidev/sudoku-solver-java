@@ -30,6 +30,7 @@ public class Program {
 		if (Arrays.equals(puzzle, solution)) {
 			SudokuSolver.show(puzzle);	
 		}
+		SudokuSolver.show(puzzle);
 	}
 
 }

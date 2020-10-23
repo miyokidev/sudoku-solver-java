@@ -53,10 +53,17 @@ public final class SudokuSolver {
 		
 		for (int row = 0; row < grid.length; row++) {
 			for (int col = 0; col < grid[row].length; col++) {
-				
+				if (grid[row][col] == 0) {
+					for (int n = 1; n < 10; n++) {
+						if (possible(row,col,n)) {
+							grid[row][col] = n;
+							grid = solve(grid);					
+						}
+					}
+				}
 			}
 		}
-		return null;
+		return grid;
 	}
 	
 	public static void show(int[][] gridToShow) {
