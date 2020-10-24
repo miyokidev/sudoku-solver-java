@@ -25,12 +25,29 @@ public final class SudokuSolver {
 		return true;
 	}
 	
+	
 	private static boolean checkBox(int row, int col, int n) {
-		int rowBox = Math.floorDiv(row,3)*3;
-		int colBox = Math.floorDiv(col,3)*3;
+        int rowBox = Math.floorDiv(row,3)*3;
+        int colBox = Math.floorDiv(col,3)*3;
+        
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (grid[rowBox+i][colBox+j] == n) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+	
+	/*				AUTRE APPROCHE DE LA METHODE CHECKBOX			 */
+	/*
+	private static boolean checkBox(int row, int col, int n) {		
+		int rowBox = row - row % 3;
+		int colBox = col - col % 3;
 		
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
+		for (int i = rowBox; i < rowBox + 3; i++) {
+			for (int j = colBox; j < colBox + 3; j++) {
 				if (grid[rowBox+i][colBox+j] == n) {
 					return false;
 				}
@@ -38,41 +55,55 @@ public final class SudokuSolver {
 		}
 		return true;
 	}
+	*/
 	
 	public static boolean possible(int row, int col, int n) {
-		if(checkRow(row, n) && 
-		   checkCol(col, n) && 
-		   checkBox(row, col, n)) {
-			return true;
-		}
-		return false;
+		return checkRow(row, n) && checkCol(col, n) && checkBox(row, col, n);
 	}
 	
-	public static int[][] solve(int[][] gridToSolve) {
+	public static boolean solve(int[][] gridToSolve) {
 		grid = gridToSolve;
 		
-		for (int row = 0; row < grid.length; row++) {
-			for (int col = 0; col < grid[row].length; col++) {
+		for (int row = 0; row < 9; row++) {
+			for (int col = 0; col < 9; col++) {
 				if (grid[row][col] == 0) {
 					for (int n = 1; n < 10; n++) {
 						if (possible(row,col,n)) {
 							grid[row][col] = n;
-							grid = solve(grid);					
+							if(solve(grid)) {
+								return true;
+							} else {
+								grid[row][col] = 0;
+							}
 						}
 					}
+					return false;
 				}
 			}
 		}
-		return grid;
+		
+		return true;
 	}
 	
 	public static void show(int[][] gridToShow) {
 		String str = "";
+		grid = gridToShow;
 		
-		for (int row = 0; row < gridToShow.length; row++) {
+		for (int row = 0; row < grid.length; row++) {
+			if (row % 3 == 0 && row != 0) {
+				str += "\r\n- - - - - - - - - - - - -";
+			} 
 			str += "\r\n";
-			for (int col = 0; col < gridToShow[row].length; col++) {
-				str += gridToShow[row][col];
+			for (int col = 0; col < grid[row].length; col++) {
+				if (col % 3 == 0 && col != 0) {
+					str += " | ";
+				}
+				
+				if (col == 8) {
+					str += grid[row][col];
+				} else {
+					str += grid[row][col] + " ";
+				}
 			}
 		}
 		
