@@ -1,2 +1,2 @@
-# sudokuSolver
-sudoku solver project
+# sudokuSolverJava
+sudoku solver project programmed in java
